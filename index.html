@@ -184,9 +184,11 @@
 
         <!-- Vídeo YouTube -->
         <div class="video-section moldura-site">
-            <iframe height="300" src="video/video.mp4" title="YouTube video" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+            
+
+            <video src="video/video.mp4" autoplay controls height="100%" width="100%">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
         </div>
 
         <div class="footer-text">Criado com amor por José Withalo 💞</div>
@@ -196,6 +198,17 @@
 
     <!-- Script da senha -->
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.querySelector('video');
+
+            // Tentar tocar automaticamente com som (pode ser bloqueado)
+            video.play().catch(() => {
+                // Toca ao clicar em qualquer lugar da página
+                document.addEventListener('click', () => {
+                    video.play();
+                }, { once: true });
+            });
+        });
         function verificarSenha() {
             const senha = document.getElementById("inputSenha").value;
             const dataFormatada = senha.split("-").reverse().join("/");
